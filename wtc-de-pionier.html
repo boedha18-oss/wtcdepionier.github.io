@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WTC De Pionier | Wielervereniging</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blauw:       #1A3A6B;   /* donkerblauw */
+    --blauw-mid:   #2557A7;   /* middenblauw */
+    --lichtblauw:  #4A90D9;   /* lichtblauw */
+    --hemel:       #D6E8F8;   /* licht hemelsblauw */
+    --wit:         #FFFFFF;
+    --offwit:      #F4F8FD;
+    --tekst:       #12223F;
+    --tekst-licht: #5A738A;
+    --accent:      #0EA5E9;   /* helder accent */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--wit);
+    color: var(--tekst);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 5%;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 3px solid var(--blauw);
+    box-shadow: 0 2px 20px rgba(26,58,107,0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.55rem;
+    letter-spacing: 0.04em;
+    color: var(--blauw);
+  }
+  .nav-logo span { color: var(--lichtblauw); }
+
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+
+  nav a {
+    color: var(--tekst);
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--blauw-mid); }
+
+  .nav-lid {
+    background: var(--blauw);
+    color: var(--wit) !important;
+    padding: 0.45rem 1.3rem;
+    font-weight: 700;
+    transition: background 0.2s !important;
+  }
+  .nav-lid:hover { background: var(--lichtblauw) !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 5%;
+    overflow: hidden;
+    background: var(--blauw);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 90% at 75% 50%, rgba(74,144,217,0.25) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(14,165,233,0.12) 0%, transparent 60%),
+      repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.03) 60px,
+        rgba(255,255,255,0.03) 61px
+      );
+  }
+
+  .hero-nummer {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(18rem, 30vw, 36rem);
+    line-height: 1;
+    color: rgba(255,255,255,0.04);
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--hemel);
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: var(--lichtblauw);
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    color: var(--wit);
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--lichtblauw);
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: rgba(214,232,248,0.8);
+    max-width: 460px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--lichtblauw);
+    color: var(--wit);
+    padding: 0.85rem 2.2rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--wit);
+    padding: 0.85rem 2.2rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--lichtblauw); background: rgba(74,144,217,0.15); transform: translateY(-2px); }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 3rem;
+    left: 5%;
+    display: flex;
+    gap: 3.5rem;
+    animation: fadeUp 0.9s 0.3s ease both;
+  }
+
+  .stat-item { text-align: left; }
+
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 2.4rem;
+    color: var(--lichtblauw);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(214,232,248,0.5);
+    margin-top: 0.2rem;
+  }
+
+  /* Fiets SVG */
+  .bike-svg {
+    position: absolute;
+    right: 5%;
+    bottom: 10%;
+    width: clamp(300px, 35vw, 520px);
+    opacity: 0.9;
+    animation: fadeRight 1s 0.4s ease both;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 5%; }
+
+  .section-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blauw-mid);
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-tag::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--blauw-mid);
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--blauw);
+  }
+
+  /* ─── OVER ONS ─── */
+  #over {
+    background: var(--offwit);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #over::before {
+    content: 'WTC';
+    position: absolute;
+    right: -2rem;
+    top: -1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 16rem;
+    color: rgba(26,58,107,0.04);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .over-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+  }
+
+  .over-tekst p {
+    color: var(--tekst-licht);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .over-kenmerken { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .kenmerk {
+    background: var(--wit);
+    padding: 1.4rem 1.5rem;
+    border-left: 4px solid var(--blauw-mid);
+    box-shadow: 0 2px 12px rgba(26,58,107,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .kenmerk:hover { transform: translateX(6px); box-shadow: 0 4px 20px rgba(26,58,107,0.12); }
+
+  .kenmerk h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--blauw);
+    margin-bottom: 0.35rem;
+  }
+  .kenmerk p { color: var(--tekst-licht); font-size: 0.92rem; line-height: 1.6; }
+
+  /* ─── RITTEN ─── */
+  #ritten { background: var(--wit); }
+
+  .ritten-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.4rem;
+    margin-top: 3rem;
+  }
+
+  .rit-kaart {
+    background: var(--offwit);
+    border: 1.5px solid rgba(26,58,107,0.1);
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .rit-kaart:hover {
+    border-color: var(--blauw-mid);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(26,58,107,0.12);
+  }
+  .rit-kaart::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 4px;
+    background: var(--blauw-mid);
+    transition: width 0.3s;
+  }
+  .rit-kaart:hover::after { width: 100%; }
+
+  .rit-datum {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blauw-mid);
+    margin-bottom: 0.6rem;
+  }
+
+  .rit-naam {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.45rem;
+    text-transform: uppercase;
+    color: var(--blauw);
+    margin-bottom: 0.5rem;
+  }
+
+  .rit-info {
+    color: var(--tekst-licht);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.3rem;
+  }
+
+  .rit-meta { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+
+  .rit-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.7rem;
+    background: rgba(37,87,167,0.09);
+    color: var(--blauw-mid);
+    border: 1px solid rgba(37,87,167,0.2);
+  }
+
+  /* ─── NIVEAUS ─── */
+  #niveaus { background: var(--blauw); }
+
+  #niveaus .section-tag { color: var(--hemel); }
+  #niveaus .section-tag::before { background: var(--lichtblauw); }
+  #niveaus .section-title { color: var(--wit); }
+  #niveaus > p { color: rgba(214,232,248,0.65) !important; }
+
+  .niveaus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .niveau-kaart {
+    padding: 2.5rem 2rem;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    text-align: center;
+    transition: all 0.25s;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .niveau-kaart.featured {
+    background: var(--wit);
+    border-color: var(--wit);
+  }
+
+  .niveau-kaart:not(.featured):hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--lichtblauw);
+  }
+
+  .niveau-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+  .niveau-naam {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.7rem;
+    color: var(--wit);
+  }
+  .niveau-kaart.featured .niveau-naam { color: var(--blauw); }
+
+  .niveau-omschrijving {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(214,232,248,0.6);
+    margin-bottom: 1.4rem;
+  }
+  .niveau-kaart.featured .niveau-omschrijving { color: var(--tekst-licht); }
+
+  .niveau-details {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--lichtblauw);
+  }
+  .niveau-kaart.featured .niveau-details { color: var(--blauw-mid); }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--offwit); border-top: 3px solid var(--blauw); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+
+  .contact-info h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--blauw-mid);
+    margin-bottom: 0.4rem;
+    margin-top: 1.6rem;
+  }
+  .contact-info h3:first-child { margin-top: 0; }
+  .contact-info p, .contact-info a {
+    color: var(--tekst-licht);
+    font-size: 0.97rem;
+    line-height: 1.7;
+    text-decoration: none;
+  }
+  .contact-info a:hover { color: var(--blauw); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--tekst-licht);
+  }
+
+  input, textarea, select {
+    background: var(--wit);
+    border: 1.5px solid rgba(26,58,107,0.15);
+    color: var(--tekst);
+    padding: 0.8rem 1rem;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--blauw-mid);
+    box-shadow: 0 0 0 3px rgba(37,87,167,0.1);
+  }
+  textarea { min-height: 120px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--blauw);
+    padding: 2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--wit);
+  }
+  .footer-logo span { color: var(--lichtblauw); }
+
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    color: rgba(214,232,248,0.45);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--wit); }
+
+  .footer-copy { color: rgba(214,232,248,0.3); font-size: 0.82rem; }
+
+  /* ─── ANIMATIES ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .wheel-spin {
+    animation: spin 4s linear infinite;
+    transform-origin: center;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    .over-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .niveaus-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+    .bike-svg { opacity: 0.1; width: 80vw; right: -10%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">WTC <span>De Pionier</span></div>
+  <ul>
+    <li><a href="#over">Over Ons</a></li>
+    <li><a href="#ritten">Ritten</a></li>
+    <li><a href="#niveaus">Niveaus</a></li>
+    <li><a href="#contact" class="nav-lid">Lid Worden</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-nummer">1</div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Wielervereniging · Opgericht 1987</div>
+    <h1 class="hero-title">
+      Rijd met<br>
+      <em>passie,</em><br>
+      rijd met ons.
+    </h1>
+    <p class="hero-sub">
+      WTC De Pionier — een vereniging voor iedereen die van fietsen houdt.
+      Van recreatieve toerritten tot competitie, altijd in goed gezelschap.
+    </p>
+    <div class="hero-btns">
+      <a href="#ritten" class="btn-primary">Bekijk Ritten</a>
+      <a href="#contact" class="btn-outline">Word Lid</a>
+    </div>
+  </div>
+
+  <!-- Fiets SVG -->
+  <svg class="bike-svg" viewBox="0 0 520 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Achterwiel -->
+    <circle cx="120" cy="200" r="85" stroke="white" stroke-width="8"/>
+    <circle cx="120" cy="200" r="12" fill="white"/>
+    <g class="wheel-spin" style="transform-origin:120px 200px">
+      <line x1="120" y1="115" x2="120" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(0,120,200)"/>
+      <line x1="120" y1="115" x2="120" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(30,120,200)"/>
+      <line x1="120" y1="115" x2="120" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(60,120,200)"/>
+      <line x1="120" y1="115" x2="120" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(90,120,200)"/>
+      <line x1="120" y1="115" x2="120" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(120,120,200)"/>
+      <line x1="120" y1="115" x2="120" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(150,120,200)"/>
+    </g>
+    <!-- Voorwiel -->
+    <circle cx="400" cy="200" r="85" stroke="white" stroke-width="8"/>
+    <circle cx="400" cy="200" r="12" fill="white"/>
+    <g class="wheel-spin" style="transform-origin:400px 200px">
+      <line x1="400" y1="115" x2="400" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(0,400,200)"/>
+      <line x1="400" y1="115" x2="400" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(30,400,200)"/>
+      <line x1="400" y1="115" x2="400" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(60,400,200)"/>
+      <line x1="400" y1="115" x2="400" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(90,400,200)"/>
+      <line x1="400" y1="115" x2="400" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(120,400,200)"/>
+      <line x1="400" y1="115" x2="400" y2="285" stroke="white" stroke-width="2.5" opacity="0.4" transform="rotate(150,400,200)"/>
+    </g>
+    <!-- Frame -->
+    <line x1="120" y1="200" x2="255" y2="100" stroke="#4A90D9" stroke-width="8" stroke-linecap="round"/>
+    <line x1="255" y1="100" x2="310" y2="200" stroke="#4A90D9" stroke-width="8" stroke-linecap="round"/>
+    <line x1="310" y1="200" x2="120" y2="200" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <line x1="255" y1="100" x2="400" y2="200" stroke="#4A90D9" stroke-width="8" stroke-linecap="round"/>
+    <line x1="310" y1="200" x2="340" y2="130" stroke="#4A90D9" stroke-width="8" stroke-linecap="round"/>
+    <!-- Stuur -->
+    <line x1="380" y1="120" x2="360" y2="150" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <line x1="370" y1="107" x2="395" y2="120" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <!-- Zadel -->
+    <line x1="255" y1="100" x2="255" y2="75" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <line x1="230" y1="72" x2="280" y2="72" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <!-- Trapas -->
+    <circle cx="310" cy="200" r="22" stroke="#4A90D9" stroke-width="4"/>
+    <circle cx="310" cy="200" r="8" fill="#4A90D9"/>
+    <!-- Pedalen -->
+    <line x1="288" y1="222" x2="260" y2="238" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <line x1="332" y1="178" x2="360" y2="162" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <!-- Ketting -->
+    <path d="M310 200 Q215 240 120 200" stroke="#4A90D9" stroke-width="2.5" stroke-dasharray="8,4" fill="none" opacity="0.7"/>
+  </svg>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">240+</div>
+      <div class="stat-label">Leden</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">36</div>
+      <div class="stat-label">Jaar Actief</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3×</div>
+      <div class="stat-label">Ritten / Week</div>
+    </div>
+  </div>
+</section>
+
+<!-- OVER ONS -->
+<section id="over">
+  <div class="section-tag">Wie zijn wij</div>
+  <div class="over-grid">
+    <div class="over-tekst">
+      <h2 class="section-title">Meer dan een club,<br>een gemeenschap.</h2>
+      <p>
+        WTC De Pionier is al sinds 1987 de thuisbasis voor fietsers in de regio.
+        We zijn opgericht door een handjevol enthousiastelingen en uitgegroeid tot een
+        levendige gemeenschap van meer dan 240 leden.
+      </p>
+      <p>
+        Bij ons draait het niet alleen om kilometers. We organiseren gezamenlijke ritten,
+        seizoensopeningen, clubkampioenschappen en gezellige etentjes na de rit.
+        Samen op de fiets — dat is waar wij voor staan.
+      </p>
+      <a href="#contact" class="btn-primary" style="margin-top:1rem;">Sluit je aan</a>
+    </div>
+    <div class="over-kenmerken">
+      <div class="kenmerk">
+        <h3>🚴 Wekelijkse Clubritten</h3>
+        <p>Elke dinsdag- en zaterdagochtend vertrekken we vanuit het clubhuis voor een geleide rit. Altijd een geleider voorop.</p>
+      </div>
+      <div class="kenmerk">
+        <h3>🏆 Competitie & Evenementen</h3>
+        <p>We nemen deel aan lokale en regionale wedstrijden. Voor wie wil, begeleiden we het hele seizoen.</p>
+      </div>
+      <div class="kenmerk">
+        <h3>🤝 Sociaal & Gezellig</h3>
+        <p>Na elke rit is er koffie en een kletsmoment. Wielervereniging zijn begint immers na het rijden.</p>
+      </div>
+      <div class="kenmerk">
+        <h3>📍 Centrale Locatie</h3>
+        <p>We vertrekken altijd vanuit Dorpsplein 12. Makkelijk bereikbaar, ruime parkeergelegenheid aanwezig.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RITTEN -->
+<section id="ritten">
+  <div class="section-tag">Planning</div>
+  <h2 class="section-title">Aankomende Ritten</h2>
+  <p style="color:var(--tekst-licht); max-width:540px; line-height:1.7; font-size:0.97rem;">
+    Bekijk onze geplande ritten voor de komende weken. Iedereen is welkom om mee te rijden — geef je op via het contactformulier.
+  </p>
+
+  <div class="ritten-grid">
+    <div class="rit-kaart">
+      <div class="rit-datum">Za 15 Maart 2025 · 08:00</div>
+      <div class="rit-naam">Voorjaarsrit Ardennen</div>
+      <div class="rit-info">Een klassieke voorjaarsrit door de heuvels van de Ardennen. Broodje bij aankomst inbegrepen.</div>
+      <div class="rit-meta">
+        <span class="rit-badge">120 km</span>
+        <span class="rit-badge">Gevorderd</span>
+        <span class="rit-badge">2200 Hm</span>
+      </div>
+    </div>
+    <div class="rit-kaart">
+      <div class="rit-datum">Di 18 Maart 2025 · 07:30</div>
+      <div class="rit-naam">Wekelijkse Clubrit</div>
+      <div class="rit-info">De vaste dinsdag-clubrit langs de polders. Rustig tempo, voor alle niveaus geschikt.</div>
+      <div class="rit-meta">
+        <span class="rit-badge">65 km</span>
+        <span class="rit-badge">Recreatief</span>
+        <span class="rit-badge">350 Hm</span>
+      </div>
+    </div>
+    <div class="rit-kaart">
+      <div class="rit-datum">Za 22 Maart 2025 · 09:00</div>
+      <div class="rit-naam">Familierit Nationaal Park</div>
+      <div class="rit-info">Rustige rit door het Nationaal Park. Geschikt voor gezinnen en nieuwe leden. Gids aanwezig.</div>
+      <div class="rit-meta">
+        <span class="rit-badge">40 km</span>
+        <span class="rit-badge">Beginner</span>
+        <span class="rit-badge">Vlak</span>
+      </div>
+    </div>
+    <div class="rit-kaart">
+      <div class="rit-datum">Za 29 Maart 2025 · 07:00</div>
+      <div class="rit-naam">Klassiekerrit Ronde van Vlaanderen</div>
+      <div class="rit-info">Bezoek de legendarische hellingen van de Ronde van Vlaanderen. Kasseien, muren en klassiekerssfeer.</div>
+      <div class="rit-meta">
+        <span class="rit-badge">160 km</span>
+        <span class="rit-badge">Expert</span>
+        <span class="rit-badge">3100 Hm</span>
+      </div>
+    </div>
+    <div class="rit-kaart">
+      <div class="rit-datum">Di 1 April 2025 · 07:30</div>
+      <div class="rit-naam">Wekelijkse Clubrit</div>
+      <div class="rit-info">Start van het kwartaal met een frisse ochtendrit. Lekker weer verwacht — zet hem op!</div>
+      <div class="rit-meta">
+        <span class="rit-badge">70 km</span>
+        <span class="rit-badge">Recreatief</span>
+        <span class="rit-badge">400 Hm</span>
+      </div>
+    </div>
+    <div class="rit-kaart">
+      <div class="rit-datum">Za 5 April 2025 · 08:30</div>
+      <div class="rit-naam">Clubkampioenschap Tijdrit</div>
+      <div class="rit-info">Jaarlijkse tijdrit van 20 km. Schrijf je tijdig in — meedoen is de beloning, winnen is een bonus.</div>
+      <div class="rit-meta">
+        <span class="rit-badge">20 km TT</span>
+        <span class="rit-badge">Competitie</span>
+        <span class="rit-badge">Inschrijven</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NIVEAUS -->
+<section id="niveaus">
+  <div class="section-tag">Voor Iedereen</div>
+  <h2 class="section-title">Kies Jouw Niveau</h2>
+  <p style="color:rgba(214,232,248,0.6); max-width:540px; line-height:1.7; font-size:0.97rem; margin-bottom:0.5rem;">
+    We organiseren ritten voor alle niveaus. Of je nu net begint of al jaren rijdt — er is altijd een groep die bij je past.
+  </p>
+
+  <div class="niveaus-grid">
+    <div class="niveau-kaart">
+      <div class="niveau-icon">🟢</div>
+      <div class="niveau-naam">Recreatief</div>
+      <div class="niveau-omschrijving">Voor wie geniet van het fietsen zonder prestatiedruk. Rustig tempo, mooie routes, gezellige groep.</div>
+      <div class="niveau-details">30–80 km · ±20 km/u</div>
+    </div>
+    <div class="niveau-kaart featured">
+      <div class="niveau-icon">🔵</div>
+      <div class="niveau-naam">Gevorderd</div>
+      <div class="niveau-omschrijving">Reguliere trainingen en uitdagende ritten. Voor leden die progressie willen maken en wat harder willen rijden.</div>
+      <div class="niveau-details">80–140 km · ±28 km/u</div>
+    </div>
+    <div class="niveau-kaart">
+      <div class="niveau-icon">🔴</div>
+      <div class="niveau-naam">Competitie</div>
+      <div class="niveau-omschrijving">Intensieve trainingen met focus op wedstrijdvoorbereiding. Deelname aan regionale en nationale wedstrijden.</div>
+      <div class="niveau-details">100–200 km · ±35 km/u</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Lid Worden</div>
+  <h2 class="section-title">Kom Rijden Met Ons</h2>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>📍 Clubhuis</h3>
+      <p>Dorpsplein 12<br>1234 AB Ons Dorp</p>
+
+      <h3>📞 Telefoon</h3>
+      <p><a href="tel:+31612345678">+31 6 12 34 56 78</a></p>
+
+      <h3>✉️ E-mail</h3>
+      <p><a href="mailto:info@wtcdepionier.nl">info@wtcdepionier.nl</a></p>
+
+      <h3>🕐 Clubhuis Open</h3>
+      <p>Dinsdag & Zaterdag<br>06:30 – 10:00 uur</p>
+
+      <h3>💰 Lidmaatschap</h3>
+      <p>Vanaf €65,– per jaar.<br>Jeugd (t/m 18 jaar): €35,–</p>
+    </div>
+
+    <form class="contact-form" onsubmit="handleForm(event)">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="naam">Voornaam</label>
+          <input type="text" id="naam" placeholder="Jan" required>
+        </div>
+        <div class="form-field">
+          <label for="achternaam">Achternaam</label>
+          <input type="text" id="achternaam" placeholder="de Vries" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="email">E-mailadres</label>
+          <input type="email" id="email" placeholder="jan@email.nl" required>
+        </div>
+        <div class="form-field">
+          <label for="niveau">Fietsniveau</label>
+          <select id="niveau">
+            <option value="">Selecteer niveau</option>
+            <option>Recreatief</option>
+            <option>Gevorderd</option>
+            <option>Competitie</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="bericht">Bericht (optioneel)</label>
+        <textarea id="bericht" placeholder="Vertel iets over jezelf of stel een vraag..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="align-self:flex-start; border:none; font-size:1rem;">
+        Verstuur Aanmelding
+      </button>
+      <div id="form-success" style="display:none; color:var(--blauw-mid); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:0.05em;">
+        ✓ Aanmelding ontvangen! We nemen snel contact met je op.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">WTC <span>De Pionier</span></div>
+  <ul class="footer-links">
+    <li><a href="#over">Over Ons</a></li>
+    <li><a href="#ritten">Ritten</a></li>
+    <li><a href="#niveaus">Niveaus</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 WTC De Pionier · Alle rechten voorbehouden</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.rit-kaart, .kenmerk, .niveau-kaart').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  function handleForm(e) {
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.reset();
+    setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
+  }
+
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow =
+      window.scrollY > 50 ? '0 4px 30px rgba(26,58,107,0.15)' : '0 2px 20px rgba(26,58,107,0.08)';
+  });
+</script>
+</body>
+</html>
